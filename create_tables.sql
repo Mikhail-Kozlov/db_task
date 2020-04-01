@@ -31,4 +31,4 @@ CREATE TABLE cashdesk (
 	drugstore_id INT NOT NULL FOREIGN KEY REFERENCES drugstores(id)
 );
 
-CREATE UNIQUE INDEX UIX_cashdesk_number ON cashdesk(number, drugstore_id);
+--CREATE UNIQUE INDEX UIX_cashdesk_number ON cashdesk(number, drugstore_id);
