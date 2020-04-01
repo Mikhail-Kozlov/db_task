@@ -53,3 +53,38 @@ GROUP BY
 	C.name, D.name, D.address
 ORDER BY 
     D.name;
+
+/* ============================================= task #10 =============================================
+Вывести список всех аптек, в которых есть кассы с описанием «Рецептура», со столбцами [Аптека], [Город], [Адрес аптеки], [Кол-во касс с рецептурой]
+   ============================================= task #10 ============================================= */
+SELECT
+    D.name AS 'Аптека',
+	C.name AS 'Город',
+	D.address AS 'Адрес аптеки',
+    COUNT(CD.id) AS 'Кол-во касс с рецептурой'
+FROM drugstores AS D
+INNER JOIN 
+	cities AS C ON C.id = D.city_id 
+INNER JOIN 
+	cashdesk AS CD ON D.id = CD.drugstore_id 
+WHERE 
+    CD.description LIKE '%рецептура%'
+GROUP BY 
+	C.name, D.name, D.address
+ORDER BY 
+    D.name;
+
+/* ============================================= task #11 =============================================
+Вывести список городов, в которых общее кол-во касс превышает 8, со столбцом [Город]
+   ============================================= task #11 ============================================= */
+SELECT
+	C.name AS 'Город'
+FROM cities AS C 
+INNER JOIN 
+	drugstores AS D ON C.id = D.city_id 
+INNER JOIN 
+	cashdesk AS CD ON D.id = CD.drugstore_id 
+GROUP BY 
+	C.name
+HAVING COUNT(CD.id) > 8;
+
